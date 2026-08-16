@@ -2,7 +2,7 @@
 
 **A browser-based electronics simulator with its own programming language.**
 
-🇹🇷 [Türkçe README](README.tr.md)
+🇹🇷 [Türkçe README](README.md)
 
 LEDBASIC lets you build and program electronic circuits without touching a single
 wire. No pin numbers, no resistor math, no datasheets — you drop components on a
