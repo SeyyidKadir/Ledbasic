@@ -2,7 +2,7 @@
 
 **Tarayıcıda çalışan, kendi programlama diline sahip elektronik simülatörü.**
 
-🇬🇧 [English README](README.md)
+🇬🇧 [English README](README-EN.md)
 
 LEDBASIC ile tek bir kablo bağlamadan devre kurup programlarsın. Pin numarası,
 direnç hesabı, datasheet yok — bileşenleri breadboard'a bırakır, adıyla çağırır,
