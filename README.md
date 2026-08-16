@@ -155,3 +155,5 @@ Tasarım ve yönlendirme proje sahibine, kod yazımı Claude'a (Anthropic), plan
 katkısı DeepSeek'e aittir. Tamamı telefonla geliştirilmiştir.
 
 Adı zaten anlatıyor: yanan şey gibi **LED**, gerçekten okunabilen şey gibi **BASIC**.
+
+Denemek için https://seyyidkadir.github.io/Ledbasic/
