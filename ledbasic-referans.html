@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEDBASIC — Referans</title><style>
+:root{--bg:#141210;--panel:#1c1a17;--panel2:#232019;--bd:#3a342a;--ink:#e8e2d4;--dim:#9a9384;
+--acc:#e8a866;--acc2:#ffc98a;--code:#12100e;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+header{position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--bd);
+padding:12px 16px;display:flex;align-items:center;gap:10px;}
+header h1{margin:0;font:700 16px var(--mono);color:var(--acc2);letter-spacing:.5px;}
+header .sub{font:11px var(--mono);color:var(--dim);margin-left:auto;}
+.wrap{max-width:820px;margin:0 auto;padding:16px;}
+nav{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-bottom:22px;}
+nav b{font:11px var(--mono);color:var(--dim);letter-spacing:.6px;display:block;margin-bottom:6px;}
+nav a{display:inline-block;font:12px var(--mono);color:var(--acc);text-decoration:none;
+padding:4px 9px;margin:2px;border:1px solid var(--bd);border-radius:6px;}
+nav a:hover{border-color:var(--acc);color:var(--acc2);}
+section{margin-bottom:34px;scroll-margin-top:60px;}
+section>h2{font:700 18px var(--mono);color:var(--acc2);margin:0 0 8px;
+padding-bottom:7px;border-bottom:1px solid var(--bd);}
+section>p.intro{color:var(--dim);margin:0 0 16px;font-size:14px;}
+.item{margin:0 0 18px;}
+.item h4{margin:0 0 4px;font:600 14px var(--mono);color:var(--ink);}
+.item p{margin:0 0 7px;color:var(--dim);font-size:13.5px;}
+pre{margin:0;background:var(--code);border:1px solid var(--bd);border-radius:8px;
+padding:11px 13px;overflow-x:auto;}
+code{font:13px/1.6 var(--mono);color:#d8e8c8;white-space:pre;}
+.kw{width:100%;border-collapse:collapse;margin:0 0 14px;}
+.kw td{border:1px solid var(--bd);padding:7px 9px;font:12.5px var(--mono);color:var(--acc);
+background:var(--panel2);border-radius:0;}
+h3{font:600 14px var(--mono);color:var(--dim);margin:16px 0 6px;letter-spacing:.3px;}
+.note{background:var(--panel2);border-left:3px solid var(--acc);border-radius:0 8px 8px 0;
+padding:10px 13px;margin:14px 0;font-size:13.5px;color:var(--dim);}
+.note b{color:var(--acc2);}
+footer{border-top:1px solid var(--bd);margin-top:30px;padding:16px;text-align:center;
+font:11px var(--mono);color:var(--dim);}
+@media(max-width:520px){ body{font-size:14px;} .wrap{padding:12px;} code{font-size:12px;} }
+</style></head>
+<body>
+<header><h1>LEDBASIC</h1><span class="sub">Referans ve Örnekler</span></header>
+<div class="wrap">
+<nav><b>İÇİNDEKİLER</b><a href="#baslangic">Başlangıç</a><a href="#degisken">Değişkenler ve Sayılar</a><a href="#operator">Operatörler</a><a href="#kosul">Koşullar</a><a href="#dongu">Döngüler</a><a href="#dizi">Diziler</a><a href="#kayit">Kayıtlar (KAYIT)</a><a href="#altprogram">Alt Programlar ve Fonksiyonlar</a><a href="#cikis">Çıkış Bileşenleri</a><a href="#giris">Giriş Bileşenleri</a><a href="#sensor">Sensörler</a><a href="#ekran">Ekranlar</a><a href="#motor">Motorlar</a><a href="#ses">Ses</a><a href="#eeprom">EEPROM ve Dosyalar</a><a href="#matematik">Matematik ve Metin Fonksiyonları</a><a href="#oyun">Oyun Fonksiyonları</a><a href="#ornek">Tam Örnekler</a><a href="#sozluk">Komut Sözlüğü</a></nav>
+<div class="note"><b>Bu dökümandaki bütün örnekler test edilmiştir.</b>
+Her kod parçası, yayınlanmadan önce dilin kendi ayrıştırıcısından geçirilmiştir;
+komut listesi de elle yazılmayıp doğrudan dilin tablosundan üretilmiştir.</div>
+<section id="baslangic"><h2>Başlangıç</h2><p class="intro">LEDBASIC, elektronik devreleri kablo bağlamadan denemek için yapılmış bir dildir.
+Pin numarası, direnç hesabı, entegre bağlantısı yok — bileşenleri adıyla çağırır,
+doğrudan mantığa odaklanırsın. Komutların hepsinin Türkçe ve İngilizce karşılığı
+vardır; büyük/küçük harf farketmez.</p><div class="item"><h4>İlk program</h4><p>Breadboard&#x27;a bir LED bırak, adı LED1 olsun. Sonra:</p><pre><code>YAK LED1
+BEKLE 500
+SONDUR LED1</code></pre></div><div class="item"><h4>Sonsuz döngü</h4><p>Yanıp sönen LED — en klasik başlangıç:</p><pre><code>IKEN DOGRU
+    DEGISTIR LED1
+    BEKLE 300
+BITTI</code></pre></div><div class="item"><h4>İngilizce yazım</h4><p>Aynı program İngilizce komutlarla:</p><pre><code>WHILE TRUE
+    TOGGLE LED1
+    PAUSE 300
+WEND</code></pre></div></section><section id="degisken"><h2>Değişkenler ve Sayılar</h2><p class="intro">Değişken tanımlamak için DEGISKEN (veya LET) kullanılır; istersen hiç kullanmadan
+doğrudan atama da yapabilirsin. Sayılar ondalıklı olabilir.</p><div class="item"><h4>Tanımlama ve atama</h4><pre><code>DEGISKEN sayac = 0
+LET hiz = 120
+mesafe = 45.5
+sayac = sayac + 1
+YAZDIR sayac</code></pre></div><div class="item"><h4>Sayı tabanları</h4><p>BASIC geleneğine uygun onaltılık, ikilik ve sekizlik yazım:</p><pre><code>YAZDIR &amp;HFF
+YAZDIR &amp;B1010
+YAZDIR &amp;O17</code></pre></div><div class="item"><h4>Metin</h4><p>Metinler çift tırnak içinde yazılır:</p><pre><code>DEGISKEN ad = &quot;LEDBASIC&quot;
+YAZDIR ad
+YAZDIR &quot;Merhaba &quot; + ad</code></pre></div></section><section id="operator"><h2>Operatörler</h2><p class="intro">Dört işlemin yanında BASIC&#x27;e özgü operatörler de vardır.</p><div class="item"><h4>Aritmetik</h4><p>Üs alma sağa birleşimlidir: 2^3^2 = 2^(3^2) = 512</p><pre><code>YAZDIR 2 + 3 * 4
+YAZDIR 2 ^ 8
+YAZDIR 7 MOD 3
+YAZDIR 7 \ 2
+YAZDIR 10 / 4</code></pre></div><div class="item"><h4>Karşılaştırma</h4><p>Eşitlik için tek = yeterlidir (PIC BASIC uyumu):</p><pre><code>EGER 5 = 5 ISE YAZDIR &quot;esit&quot;
+EGER 3 &lt; 7 ISE YAZDIR &quot;kucuk&quot;
+EGER 9 &lt;&gt; 2 ISE YAZDIR &quot;farkli&quot;</code></pre></div><div class="item"><h4>Mantıksal</h4><pre><code>EGER 1 = 1 VE 2 = 2 ISE YAZDIR &quot;ikisi de dogru&quot;
+EGER 1 = 2 VEYA 3 = 3 ISE YAZDIR &quot;biri dogru&quot;
+EGER DEGIL (1 = 2) ISE YAZDIR &quot;degil&quot;</code></pre></div></section><section id="kosul"><h2>Koşullar</h2><p class="intro">EGER bloğu hem tek satırlık hem çok satırlık yazılabilir. Bloğu kapatmak için
+BITTI veya EGERBITIR kullanılır.</p><div class="item"><h4>Tek satır</h4><p>Kısa kontroller için pratiktir, blok kapatıcı istemez:</p><pre><code>DEGISKEN x = 7
+EGER x &gt; 5 ISE YAZDIR &quot;buyuk&quot;
+EGER x &gt; 5 ISE YAZDIR &quot;buyuk&quot; YOKSA YAZDIR &quot;kucuk&quot;</code></pre></div><div class="item"><h4>Çok satır</h4><pre><code>DEGISKEN x = 2
+EGER x = 1 ISE
+    YAZDIR &quot;bir&quot;
+YOKSAEGER x = 2 ISE
+    YAZDIR &quot;iki&quot;
+YOKSA
+    YAZDIR &quot;baska&quot;
+EGERBITIR</code></pre></div><div class="item"><h4>DURUM (çoklu dal)</h4><p>Aynı değeri birçok kez karşılaştırmak yerine:</p><pre><code>DEGISKEN secim = 7
+DURUM secim
+    OLURSA 1
+        YAZDIR &quot;birinci&quot;
+    OLURSA 2, 3
+        YAZDIR &quot;ikinci veya ucuncu&quot;
+    OLURSA 5 KADAR 9
+        YAZDIR &quot;bes ile dokuz arasi&quot;
+    DIGER
+        YAZDIR &quot;hicbiri&quot;
+BITTI</code></pre></div></section><section id="dongu"><h2>Döngüler</h2><p class="intro">Sayılı döngü için ICIN/SONRA (veya DONGU/SONRAKI), koşullu döngü için IKEN kullanılır.</p><div class="item"><h4>Sayılı döngü</h4><pre><code>DEGISKEN toplam = 0
+ICIN i = 1 KADAR 10
+    toplam = toplam + i
+SONRA i
+YAZDIR toplam</code></pre></div><div class="item"><h4>Adım belirtme</h4><p>Negatif adımla geriye de sayabilirsin:</p><pre><code>ICIN i = 0 KADAR 10 ADIM 2
+    YAZDIR i
+SONRA i
+
+ICIN j = 5 KADAR 1 ADIM -1
+    YAZDIR j
+SONRA j</code></pre></div><div class="item"><h4>Koşullu döngü</h4><pre><code>DEGISKEN n = 0
+IKEN n &lt; 5
+    n = n + 1
+IKENBITIR
+YAZDIR n</code></pre></div><div class="item"><h4>Döngüden çıkma</h4><p>DUR döngüyü kırar, DEVAM sonraki tura atlar:</p><pre><code>ICIN i = 1 KADAR 10
+    EGER i = 3 ISE DEVAM
+    EGER i = 6 ISE DUR
+    YAZDIR i
+SONRA i</code></pre></div></section><section id="dizi"><h2>Diziler</h2><p class="intro">DIZI ile sabit boyutlu dizi tanımlanır. İndeks 0&#x27;dan başlar. Sınır dışına
+erişmek programı çökertmez: okuma 0 döner, yazma yok sayılır.</p><div class="item"><h4>Tanımlama ve kullanım</h4><pre><code>DIZI skorlar[5]
+skorlar[0] = 90
+skorlar[1] = 75
+YAZDIR skorlar[0]</code></pre></div><div class="item"><h4>Döngüyle doldurma</h4><pre><code>DIZI kare[6]
+ICIN i = 0 KADAR 5
+    kare[i] = i * i
+SONRA i
+
+DEGISKEN toplam = 0
+ICIN i = 0 KADAR 5
+    toplam = toplam + kare[i]
+SONRA i
+YAZDIR toplam</code></pre></div></section><section id="kayit"><h2>Kayıtlar (KAYIT)</h2><p class="intro">Birden fazla değeri tek isim altında gruplamak için kullanılır. Sınıf, kalıtım
+ya da metot yoktur — sadece isimli alanlar demetidir.</p><div class="item"><h4>Tanım ve kullanım</h4><p>Alanlara erişim nokta ile yapılır:</p><pre><code>KAYIT Oyuncu
+    isim
+    skor
+BITTI
+
+DEGISKEN p = YENI Oyuncu
+p.skor = 100
+YAZDIR p.skor</code></pre></div><div class="item"><h4>Kayıt dizisi</h4><p>Her elemanı ayrıca YENI ile oluşturmak gerekir:</p><pre><code>KAYIT Nokta
+    x
+    y
+BITTI
+
+DIZI yol[4]
+ICIN i = 0 KADAR 3
+    yol[i] = YENI Nokta
+    yol[i].x = i * 2
+    yol[i].y = i
+SONRA i
+YAZDIR yol[2].x</code></pre></div></section><section id="altprogram"><h2>Alt Programlar ve Fonksiyonlar</h2><p class="intro">ALTPROGRAM iş yapar, değer döndürmez. FONKSIYON ise DONDUR ile değer döndürür ve
+ifade içinde kullanılabilir. İkisinin de kendi yerel değişken alanı vardır.</p><div class="item"><h4>Alt program</h4><p>CAGIR ile çağrılır:</p><pre><code>ALTPROGRAM yanip_son(led, sure)
+    YAK led
+    BEKLE sure
+    SONDUR led
+BITTI
+
+CAGIR yanip_son(LED1, 300)</code></pre></div><div class="item"><h4>Fonksiyon</h4><p>Doğrudan ifade içinde kullanılır:</p><pre><code>FONKSIYON kdvli(f)
+    DONDUR f * 120 / 100
+BITTI
+
+YAZDIR kdvli(100)</code></pre></div><div class="item"><h4>Kapsam</h4><p>Alt program içinde yazılan değişken YERELdir. Global değişkene bilerek yazmak için GENEL kullanılır:</p><pre><code>DEGISKEN sayac = 0
+
+ALTPROGRAM artir()
+    GENEL sayac = sayac + 1
+BITTI
+
+CAGIR artir()
+CAGIR artir()
+YAZDIR sayac</code></pre></div><div class="item"><h4>Etiket ve GIT</h4><p>Eski usul atlama da desteklenir:</p><pre><code>DEGISKEN c = 0
+bas:
+    c = c + 1
+    EGER c &lt; 3 ISE GIT bas
+YAZDIR c</code></pre></div></section><section id="cikis"><h2>Çıkış Bileşenleri</h2><p class="intro">LED, güç LED&#x27;i, LED şerit ve röle. Hepsi YAK / SONDUR / DEGISTIR ile
+kontrol edilir; ek komutlarla renk ve parlaklık ayarlanır.</p><div class="item"><h4>LED</h4><p>RENKAYARLA ile herhangi bir renge boyanabilir (0-255 kırmızı/yeşil/mavi):</p><pre><code>YAK LED1
+SONDUR LED1
+DEGISTIR LED1
+RENKAYARLA LED1, 255, 120, 0</code></pre></div><div class="item"><h4>Güç LED&#x27;i</h4><p>PARLAKLIK ile PWM kısma:</p><pre><code>YAK GUCLED1
+PARLAKLIK GUCLED1, 255
+BEKLE 200
+PARLAKLIK GUCLED1, 60</code></pre></div><div class="item"><h4>LED şerit</h4><p>Adreslenebilir RGB şeritte her LED ayrı renk alır:</p><pre><code>SERITTEMIZLE SERIT1
+SERITRENK SERIT1, 0, 255, 0, 0
+SERITRENK SERIT1, 1, 0, 255, 0
+SERITDOLDUR SERIT1, 0, 0, 120
+SERITPARLAKLIK SERIT1, 180</code></pre></div><div class="item"><h4>Yürüyen ışık</h4><p>SERITKAYDIR dairesel kaydırır — kovalamaca efekti:</p><pre><code>SERITTEMIZLE SERIT1
+SERITRENK SERIT1, 0, 255, 0, 0
+ICIN i = 1 KADAR 16
+    SERITKAYDIR SERIT1, 1
+    BEKLE 80
+SONRA i</code></pre></div><div class="item"><h4>Röle</h4><p>Çok kanallı modüllerde kanal numarası verilir:</p><pre><code>ROLEAC ROLE1
+ROLEKAPAT ROLE1
+ROLEAC ROLE1, 3
+EGER ROLEDURUM(ROLE1, 3) = 1 ISE YAZDIR &quot;acik&quot;</code></pre></div></section><section id="giris"><h2>Giriş Bileşenleri</h2><p class="intro">Buton, darbe buton ve potansiyometre. Hepsi ifade içinde okunur.</p><div class="item"><h4>Buton</h4><p>Basılı olduğu sürece 1 döner:</p><pre><code>EGER BUTON(BUTON1) = 1 ISE
+    YAK LED1
+YOKSA
+    SONDUR LED1
+BITTI</code></pre></div><div class="item"><h4>Darbe buton</h4><p>Basılı tutulsa bile SADECE BİR KEZ 1 döner — sayaç için birebir:</p><pre><code>DEGISKEN sayac = 0
+EGER BUTON(DARBEBUTON1) = 1 ISE
+    sayac = sayac + 1
+BITTI</code></pre></div><div class="item"><h4>Potansiyometre</h4><p>0-1023 arası değer döner:</p><pre><code>DEGISKEN deger = POT(POT1)
+YAZDIR deger
+EGER deger &gt; 512 ISE YAK LED1</code></pre></div></section><section id="sensor"><h2>Sensörler</h2><p class="intro">Hepsi ifade içinde okunur. Değerleri bileşenin üzerindeki kaydırıcıdan veya
+ayar menüsünden elle değiştirip programını deneyebilirsin.</p><div class="item"><h4>Işık (LDR)</h4><p>0-1023; karanlıkta düşük, aydınlıkta yüksek:</p><pre><code>EGER ISIK(SENSOR1) &lt; 300 ISE
+    ROLEAC ROLE1
+YOKSA
+    ROLEKAPAT ROLE1
+BITTI</code></pre></div><div class="item"><h4>Hareket (PIR)</h4><p>Hareket varsa 1, yoksa 0:</p><pre><code>EGER HAREKET(PIRSENSOR1) = 1 ISE
+    YAK LED1
+    SES BUZZER1, 72, 200
+BITTI</code></pre></div><div class="item"><h4>Mesafe (HC-SR04)</h4><p>2-400 cm:</p><pre><code>DEGISKEN m = ULTRASON(MESAFE1)
+EGER m &lt; 20 ISE YAZDIR &quot;cok yakin&quot;</code></pre></div><div class="item"><h4>Sıcaklık</h4><p>Ortam sıcaklığı hedefe doğru kademeli değişir:</p><pre><code>DEGISKEN s = SICAKLIK(TERMO1)
+EGER s &gt; 25 ISE
+    DCYAK MOTOR1, 200
+YOKSA
+    DCDUR MOTOR1
+BITTI</code></pre></div><div class="item"><h4>Yağmur, çizgi, nem</h4><pre><code>YAZDIR YAGMUR(YAGMURSENSOR1)
+YAZDIR CNY70(CIZGI1)
+YAZDIR NEM(NEMSENSOR1)
+YAZDIR NEMSICAKLIK(NEMSENSOR1)</code></pre></div></section><section id="ekran"><h2>Ekranlar</h2><p class="intro">Karakter LCD, grafik LCD, 7-segment, LED matrix ve LED tabela.</p><div class="item"><h4>Karakter LCD</h4><p>İmleci konumlandırıp yazabilirsin:</p><pre><code>LCDTEMIZLE EKRAN1
+LCDYAZ EKRAN1, &quot;Merhaba&quot;
+LCDIMLEC EKRAN1, 1, 0
+LCDYAZ EKRAN1, &quot;ikinci satir&quot;</code></pre></div><div class="item"><h4>Grafik LCD</h4><p>Piksel, çizgi ve şekiller:</p><pre><code>LCDTEMIZLE EKRAN1
+LCDNOKTA EKRAN1, 10, 10
+LCDCIZGI EKRAN1, 0, 0, 60, 30
+LCDDIKDORTGEN EKRAN1, 5, 5, 40, 20
+LCDDAIRE EKRAN1, 60, 30, 15, DOGRU
+LCDSIL EKRAN1, 10, 10</code></pre></div><div class="item"><h4>7-segment</h4><p>Sayı yazabilir ya da tek tek segment yakabilirsin:</p><pre><code>SEGYAZ SAYI1, 42
+SEGYAZ SAYI1, &quot;1A&quot;
+SEGYAK SAYI1, 0, a
+SEGSONDUR SAYI1, 0, g
+SEGTEMIZLE SAYI1</code></pre></div><div class="item"><h4>LED matrix</h4><p>MATRIXSIL tek pikseli söndürür — hareketli nesneler için şart:</p><pre><code>MATRIXTEMIZLE MATRIS1
+MATRIXNOKTA MATRIS1, 3, 4
+MATRIXCIZGI MATRIS1, 0, 0, 7, 7
+MATRIXDAIRE MATRIS1, 4, 4, 3
+MATRIXSIL MATRIS1, 3, 4
+MATRIXRENK MATRIS1, 2, 2, 0, 255, 0</code></pre></div><div class="item"><h4>LED tabela</h4><p>Reklam panosu gibi kayan yazı:</p><pre><code>TABELAYAZ TABELA1, &quot;INDIRIM VAR&quot;
+TABELAEFEKT TABELA1, kayan
+TABELAHIZ TABELA1, 60
+TABELARENK TABELA1, 255, 170, 0</code></pre></div></section><section id="motor"><h2>Motorlar</h2><p class="intro">DC motor, servo ve step motor.</p><div class="item"><h4>DC motor</h4><p>Hız 0-255 arası PWM değeridir:</p><pre><code>DCYAK MOTOR1, 200
+BEKLE 500
+DCTERSYAK MOTOR1, 120
+BEKLE 500
+DCDUR MOTOR1</code></pre></div><div class="item"><h4>Servo</h4><p>Açı 0-180 derece:</p><pre><code>SERVOYAZ SERVO1, 0
+BEKLE 300
+SERVOYAZ SERVO1, 90
+BEKLE 300
+SERVOYAZ SERVO1, 180</code></pre></div><div class="item"><h4>Step motor</h4><p>Adım sayısının işareti yönü belirler:</p><pre><code>STEPHIZ STEP1, 60
+STEPADIM STEP1, 200
+BEKLE 500
+STEPADIM STEP1, -100</code></pre></div></section><section id="ses"><h2>Ses</h2><p class="intro">Buzzer, sounder ve hoparlör. PIC BASIC&#x27;in SOUND ve FREQOUT komutlarına karşılık
+gelir. Ses çalarken program bekler, bu yüzden arka arkaya yazılan notalar
+bir melodi olur.</p><div class="item"><h4>Nota numarasıyla</h4><p>MIDI nota numarası (60 = orta do), 0 = sessizlik:</p><pre><code>SES BUZZER1, 60, 200
+SES BUZZER1, 62, 200
+SES BUZZER1, 64, 200</code></pre></div><div class="item"><h4>Nota adıyla</h4><p>Türkçe veya İngilizce nota adı, diyez için #:</p><pre><code>NOTA HOPARLOR1, &quot;DO4&quot;, 250
+NOTA HOPARLOR1, &quot;MI4&quot;, 250
+NOTA HOPARLOR1, &quot;SOL4&quot;, 250
+NOTA HOPARLOR1, &quot;C5&quot;, 400</code></pre></div><div class="item"><h4>Doğrudan frekans</h4><p>Alarm ve siren için:</p><pre><code>FREKANS SOUNDER1, 3000, 400
+SESSEVIYE SOUNDER1, 220
+SESKES SOUNDER1</code></pre></div><div class="item"><h4>Melodi</h4><p>Diziye nota koyup çalabilirsin:</p><pre><code>DIZI ezgi[4]
+ezgi[0] = 60
+ezgi[1] = 64
+ezgi[2] = 67
+ezgi[3] = 72
+ICIN i = 0 KADAR 3
+    SES BUZZER1, ezgi[i], 180
+SONRA i</code></pre></div></section><section id="eeprom"><h2>EEPROM ve Dosyalar</h2><p class="intro">İki katmanlı kalıcı depolama: ham bayt erişimi ve isimli dosyalar. Dosyalar
+ham belleğin İÇİNDE yaşar — DOSYAADRES ile bir dosyanın başlangıç adresini alıp
+baytlarını tek tek okuyabilirsin.</p><div class="item"><h4>Ham bayt</h4><p>Adres 0&#x27;dan bellek boyutuna kadar, değer 0-255:</p><pre><code>EEPROMYAZ EEPROM1, 0, 65
+EEPROMYAZ EEPROM1, 1, 66
+YAZDIR EEPROMOKU(EEPROM1, 0)
+EEPROMTEMIZLE EEPROM1</code></pre></div><div class="item"><h4>Dosyalar</h4><pre><code>DOSYAYAZ EEPROM1, &quot;ayar.txt&quot;, &quot;parlaklik=200&quot;
+YAZDIR DOSYAOKU(EEPROM1, &quot;ayar.txt&quot;)
+YAZDIR DOSYABOYUT(EEPROM1, &quot;ayar.txt&quot;)
+EGER DOSYAVARMI(EEPROM1, &quot;ayar.txt&quot;) = 1 ISE YAZDIR &quot;var&quot;
+DOSYASIL EEPROM1, &quot;ayar.txt&quot;</code></pre></div><div class="item"><h4>İki katmanı birleştirmek</h4><p>Dosyanın baytlarına doğrudan erişim:</p><pre><code>DOSYAYAZ EEPROM1, &quot;mesaj.txt&quot;, &quot;LED&quot;
+DEGISKEN adres = DOSYAADRES(EEPROM1, &quot;mesaj.txt&quot;)
+DEGISKEN boyut = DOSYABOYUT(EEPROM1, &quot;mesaj.txt&quot;)
+ICIN i = 0 KADAR boyut - 1
+    YAZDIR EEPROMOKU(EEPROM1, adres + i)
+SONRA i</code></pre></div></section><section id="matematik"><h2>Matematik ve Metin Fonksiyonları</h2><p class="intro">Hepsi ifade içinde kullanılır.</p><div class="item"><h4>Matematik</h4><pre><code>YAZDIR MUTLAK(-5)
+YAZDIR KAREKOK(16)
+YAZDIR US(2, 10)
+YAZDIR YUVARLA(3.7)
+YAZDIR TAMSAYI(3.9)
+YAZDIR ISARET(-4)
+YAZDIR ENAZ(3, 7)
+YAZDIR ENCOK(3, 7)
+YAZDIR RASTGELE(1, 6)</code></pre></div><div class="item"><h4>Metin</h4><p>Konumlar 1&#x27;den başlar (BASIC geleneği):</p><pre><code>YAZDIR UZUNLUK(&quot;merhaba&quot;)
+YAZDIR SOL(&quot;merhaba&quot;, 3)
+YAZDIR SAG(&quot;merhaba&quot;, 3)
+YAZDIR ORTA(&quot;merhaba&quot;, 2, 3)
+YAZDIR BUYUKHARF(&quot;ledbasic&quot;)
+YAZDIR KUCUKHARF(&quot;LEDBASIC&quot;)
+YAZDIR KIRP(&quot;  bosluk  &quot;)
+YAZDIR ARA(&quot;merhaba&quot;, &quot;hab&quot;)
+YAZDIR KARAKTER(65)
+YAZDIR KOD(&quot;A&quot;)
+YAZDIR SAYIYA(&quot;42&quot;)
+YAZDIR YAZIYA(42)</code></pre></div></section><section id="oyun"><h2>Oyun Fonksiyonları</h2><p class="intro">Konum sınırlama, çarpışma algılama ve desen çizimi.</p><div class="item"><h4>Konum</h4><p>SINIRLA aralıkta tutar, SARMALA diğer uçtan çıkarır:</p><pre><code>YAZDIR SINIRLA(15, 0, 7)
+YAZDIR SARMALA(8, 0, 7)
+YAZDIR SARMALA(-1, 0, 7)
+YAZDIR UZAKLIK(0, 0, 3, 4)</code></pre></div><div class="item"><h4>Çarpışma</h4><p>Dikdörtgen ve nokta çarpışması:</p><pre><code>EGER CARPISTI(0, 0, 4, 4, 2, 2, 4, 4) = 1 ISE YAZDIR &quot;carpti&quot;
+EGER NOKTACARPTI(3, 3, 2, 2, 4, 4) = 1 ISE YAZDIR &quot;hedefte&quot;</code></pre></div><div class="item"><h4>Ekrandan çarpışma</h4><p>O piksel yanıksa 1 döner — duvara çarpma testi:</p><pre><code>EGER MATRIXOKU(MATRIS1, 3, 4) = 1 ISE YAZDIR &quot;dolu&quot;</code></pre></div><div class="item"><h4>Desen çizimi</h4><p>Dizinin her elemanı bir satırın bit maskesidir:</p><pre><code>DIZI gemi[3]
+gemi[0] = 2
+gemi[1] = 7
+gemi[2] = 5
+SPRITECIZ MATRIS1, 2, 2, gemi, 3</code></pre></div></section><section id="ornek"><h2>Tam Örnekler</h2><p class="intro">Birden fazla bileşeni birlikte kullanan çalışır programlar.</p><div class="item"><h4>Gece lambası</h4><p>Karanlık olunca röleyi aç:</p><pre><code>IKEN DOGRU
+    EGER ISIK(SENSOR1) &lt; 300 ISE
+        ROLEAC ROLE1
+        YAK LED1
+    YOKSA
+        ROLEKAPAT ROLE1
+        SONDUR LED1
+    BITTI
+    BEKLE 200
+BITTI</code></pre></div><div class="item"><h4>Termostat</h4><p>Sıcaklığa göre fan ve uyarı:</p><pre><code>ALTPROGRAM uyar()
+    SES BUZZER1, 72, 150
+BITTI
+
+IKEN DOGRU
+    DEGISKEN s = SICAKLIK(TERMO1)
+    LCDTEMIZLE EKRAN1
+    LCDYAZ EKRAN1, &quot;Sicaklik: &quot; + YAZIYA(s)
+    EGER s &gt; 28 ISE
+        DCYAK MOTOR1, 220
+        CAGIR uyar()
+    YOKSAEGER s &gt; 24 ISE
+        DCYAK MOTOR1, 120
+    YOKSA
+        DCDUR MOTOR1
+    EGERBITIR
+    BEKLE 500
+BITTI</code></pre></div><div class="item"><h4>Park sensörü</h4><p>Yaklaştıkça hızlanan bip:</p><pre><code>IKEN DOGRU
+    DEGISKEN m = ULTRASON(MESAFE1)
+    SEGYAZ SAYI1, m
+    EGER m &lt; 50 ISE
+        DEGISKEN aralik = SINIRLA(m * 8, 60, 600)
+        SES BUZZER1, 76, 80
+        BEKLE aralik
+    YOKSA
+        BEKLE 300
+    BITTI
+BITTI</code></pre></div><div class="item"><h4>Matrix&#x27;te hareket eden nokta</h4><p>Potla yönlendirilen, kenardan sarmalanan nokta:</p><pre><code>DEGISKEN x = 0
+DEGISKEN y = 4
+
+IKEN DOGRU
+    MATRIXSIL MATRIS1, x, y
+    y = SINIRLA(TAMSAYI(POT(POT1) * 8 / 1023), 0, 7)
+    x = SARMALA(x + 1, 0, 7)
+    MATRIXNOKTA MATRIS1, x, y
+    BEKLE 150
+BITTI</code></pre></div><div class="item"><h4>Sayaç</h4><p>Darbe butonla artan, ekranda görünen sayaç:</p><pre><code>DEGISKEN sayi = 0
+
+IKEN DOGRU
+    EGER BUTON(DARBEBUTON1) = 1 ISE
+        sayi = SARMALA(sayi + 1, 0, 9999)
+        SES BUZZER1, 84, 60
+    BITTI
+    SEGYAZ SAYI1, sayi
+    BEKLE 50
+BITTI</code></pre></div></section><section id="sozluk"><h2>Komut Sözlüğü</h2>
+<p class="intro">Aşağıdaki liste doğrudan dilin kendi tablosundan üretilmiştir; her satırdaki
+yazımlar birbirinin aynısıdır ve hepsi geçerlidir. Büyük/küçük harf farketmez.</p>
+<h3>Kontrol</h3><table class="kw"><tr><td class="k">EGER · EĞER · IF</td></tr><tr><td class="k">ISE · THEN · İSE</td></tr><tr><td class="k">ELSE · YOKSA</td></tr><tr><td class="k">ELSEIF · YOKSAEGER · YOKSAEĞER</td></tr><tr><td class="k">BITTI · BİTTİ · EGERBITIR · ENDIF · EĞERBİTİR</td></tr><tr><td class="k">BITIR · BİTİR · END</td></tr><tr><td class="k">DURUM · SELECT</td></tr><tr><td class="k">CASE · OLURSA</td></tr><tr><td class="k">DIGER · DİĞER · OTHERWISE</td></tr><tr><td class="k">IKEN · WHILE · İKEN</td></tr><tr><td class="k">IKENBITIR · WEND · İKENBİTİR</td></tr><tr><td class="k">DONGU · DÖNGÜ · FOR · ICIN · İÇİN</td></tr><tr><td class="k">KADAR · TO</td></tr><tr><td class="k">ADIM · STEP</td></tr><tr><td class="k">NEXT · SONRA · SONRAKI</td></tr><tr><td class="k">BREAK · DUR</td></tr><tr><td class="k">CONTINUE · DEVAM</td></tr><tr><td class="k">GIT · GOTO · GİT</td></tr><tr><td class="k">CAGIR · GOSUB · ÇAĞIR</td></tr><tr><td class="k">DON · DÖN · RETURN</td></tr></table><h3>Veri</h3><table class="kw"><tr><td class="k">DEGISKEN · DEĞİŞKEN · LET</td></tr><tr><td class="k">DIM · DIZI</td></tr><tr><td class="k">KAYIT · RECORD</td></tr><tr><td class="k">NEW · YENI · YENİ</td></tr><tr><td class="k">ALTPROGRAM · SUB</td></tr><tr><td class="k">FONKSIYON · FUNCTION</td></tr><tr><td class="k">DONDUR · GIVE</td></tr><tr><td class="k">GENEL · GLOBAL</td></tr><tr><td class="k">PRINT · YAZDIR</td></tr></table><h3>Mantık/Operatör</h3><table class="kw"><tr><td class="k">AND · VE</td></tr><tr><td class="k">OR · VEYA</td></tr><tr><td class="k">DEGIL · DEĞİL · NOT</td></tr><tr><td class="k">KALAN · MOD</td></tr><tr><td class="k">DOGRU · DOĞRU · TRUE</td></tr><tr><td class="k">FALSE · YANLIS · YANLIŞ</td></tr><tr><td class="k">BEKLE · PAUSE</td></tr></table><h3>LED / Çıkış</h3><table class="kw"><tr><td class="k">HIGH · YAK</td></tr><tr><td class="k">LOW · SONDUR · SÖNDÜR</td></tr><tr><td class="k">DEGISTIR · DEĞİŞTİR · TOGGLE</td></tr><tr><td class="k">RENKAYARLA · SETCOLOR</td></tr><tr><td class="k">BRIGHTNESS · PARLAKLIK</td></tr><tr><td class="k">SERITRENK · STRIPCOLOR</td></tr><tr><td class="k">SERITDOLDUR · STRIPFILL</td></tr><tr><td class="k">SERITTEMIZLE · STRIPCLEAR</td></tr><tr><td class="k">SERITKAYDIR · STRIPSHIFT</td></tr><tr><td class="k">SERITPARLAKLIK · STRIPBRIGHT</td></tr><tr><td class="k">RELAYON · ROLEAC</td></tr><tr><td class="k">RELAYOFF · ROLEKAPAT</td></tr><tr><td class="k">RELAYSTATE · ROLEDURUM</td></tr></table><h3>Giriş / Sensör</h3><table class="kw"><tr><td class="k">BUTON · BUTTON</td></tr><tr><td class="k">POT · POTOKU</td></tr><tr><td class="k">ISIK · LDR</td></tr><tr><td class="k">HAREKET · PIR</td></tr><tr><td class="k">MESAFEOLC · ULTRASON · ULTRASONIC</td></tr><tr><td class="k">SICAKLIK · TEMP</td></tr><tr><td class="k">RAIN · YAGMUR · YAGMURSENSOR</td></tr><tr><td class="k">CNY70 · ZITLIK</td></tr><tr><td class="k">HUMIDITY · NEM · NEMOLC</td></tr><tr><td class="k">HUMIDTEMP · NEMSICAKLIK</td></tr><tr><td class="k">RANDOM · RASTGELE</td></tr></table><h3>LCD</h3><table class="kw"><tr><td class="k">LCDPRINT · LCDYAZ</td></tr><tr><td class="k">LCDCLEAR · LCDTEMIZLE</td></tr><tr><td class="k">LCDCURSOR · LCDIMLEC</td></tr><tr><td class="k">LCDNOKTA · LCDPIXEL</td></tr><tr><td class="k">LCDOFF · LCDSIL</td></tr><tr><td class="k">LCDCIZGI · LCDLINE</td></tr><tr><td class="k">LCDDIKDORTGEN · LCDRECT</td></tr><tr><td class="k">LCDCIRCLE · LCDDAIRE</td></tr></table><h3>7-Segment</h3><table class="kw"><tr><td class="k">SEGPRINT · SEGYAZ</td></tr><tr><td class="k">SEGON · SEGYAK</td></tr><tr><td class="k">SEGOFF · SEGSONDUR</td></tr><tr><td class="k">SEGCLEAR · SEGTEMIZLE</td></tr></table><h3>LED Matrix</h3><table class="kw"><tr><td class="k">MATRIXNOKTA · MATRIXPIXEL</td></tr><tr><td class="k">MATRIXOFF · MATRIXSIL</td></tr><tr><td class="k">MATRIXCIZGI · MATRIXLINE</td></tr><tr><td class="k">MATRIXDIKDORTGEN · MATRIXRECT</td></tr><tr><td class="k">MATRIXCIRCLE · MATRIXDAIRE</td></tr><tr><td class="k">MATRIXCLEAR · MATRIXTEMIZLE</td></tr><tr><td class="k">MATRIXCOLOR · MATRIXRENK</td></tr><tr><td class="k">SPRITE · SPRITECIZ</td></tr><tr><td class="k">LCDOKU · LCDREAD · MATRIXOKU · MATRIXREAD · SIGNREAD · TABELAOKU</td></tr></table><h3>LED Tabela</h3><table class="kw"><tr><td class="k">SIGNTEXT · TABELAYAZ</td></tr><tr><td class="k">SIGNEFFECT · TABELAEFEKT</td></tr><tr><td class="k">SIGNSPEED · TABELAHIZ</td></tr><tr><td class="k">SIGNCOLOR · TABELARENK</td></tr><tr><td class="k">SIGNCLEAR · TABELATEMIZLE</td></tr><tr><td class="k">SIGNPIXEL · TABELANOKTA</td></tr><tr><td class="k">SIGNOFF · TABELASIL</td></tr><tr><td class="k">SIGNLINE · TABELACIZGI</td></tr></table><h3>Motor</h3><table class="kw"><tr><td class="k">DCON · DCYAK</td></tr><tr><td class="k">DCREVERSE · DCTERSYAK</td></tr><tr><td class="k">DCDUR · DCSTOP</td></tr><tr><td class="k">SERVOWRITE · SERVOYAZ</td></tr><tr><td class="k">STEPADIM · STEPMOVE</td></tr><tr><td class="k">STEPHIZ · STEPSPEED</td></tr></table><h3>Ses</h3><table class="kw"><tr><td class="k">SES · SOUND</td></tr><tr><td class="k">FREKANS · FREQOUT</td></tr><tr><td class="k">NOTA · TONE</td></tr><tr><td class="k">NOSOUND · SESKES</td></tr><tr><td class="k">SESSEVIYE · VOLUME</td></tr></table><h3>EEPROM</h3><table class="kw"><tr><td class="k">EEPROMWRITE · EEPROMYAZ</td></tr><tr><td class="k">EEPROMOKU · EEPROMREAD</td></tr><tr><td class="k">EEPROMCLEAR · EEPROMTEMIZLE</td></tr><tr><td class="k">DOSYAYAZ · FILEWRITE</td></tr><tr><td class="k">DOSYAOKU · FILEREAD</td></tr><tr><td class="k">DOSYABOYUT · FILESIZE</td></tr><tr><td class="k">DOSYAADRES · FILEADDR</td></tr><tr><td class="k">DOSYAVARMI · FILEEXISTS</td></tr><tr><td class="k">DOSYASIL · FILEDELETE</td></tr></table><h3>Matematik / Metin / Oyun</h3><table class="kw"><tr><td class="k">ABS · ARA · ASC · BUYUKHARF · BÜYÜKHARF · CARPISTI · CHR · CLAMP · COS · DIST · ENAZ · ENCOK · INSTR · INT · ISARET · KARAKTER · KAREKOK · KIRP · KOD · KOSINUS · KUCUKHARF · KÜÇÜKHARF · LEFT · LEN · LOG · LOGARITMA · LOWER · MAX · MID · MIN · MUTLAK · NOKTACARPTI · ORTA · PI · PISAYISI · POINTHIT · POW · RECTHIT · RIGHT · ROUND · SAG · SARMALA · SAYIYA · SAĞ · SIGN · SIN · SINIRLA · SINUS · SOL · SQRT · STR · TAMSAYI · TAN · TANJANT · TRIM · UPPER · US · UZAKLIK · UZUNLUK · VAL · WRAP · YAZIYA · YUVARLA</td></tr></table></section>
+</div>
+<footer>LEDBASIC — kabloyu değil, mantığı öğreten simülatör</footer>
+</body></html>
