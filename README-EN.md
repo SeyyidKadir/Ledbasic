@@ -157,3 +157,5 @@ with planning input from DeepSeek. Built entirely on a phone.
 
 The name says it: **LED** like the thing that lights up, **BASIC** like the thing
 you can actually read.
+
+For try https://seyyidkadir.github.io/Ledbasic/
